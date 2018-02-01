@@ -1,0 +1,6 @@
+# Meson build directories (local and package)
+/build/
+/obj-*/
+/tutorials/
+
+*.css
