@@ -3,4 +3,6 @@
 /obj-*/
 /tutorials/
 
-*.css
+gnome-shell.css
+gtk-dark.css
+gtk.css
