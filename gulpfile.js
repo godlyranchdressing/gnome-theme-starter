@@ -1,9 +1,9 @@
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 const copy = require("gulp-copy");
-const run = require("gulp-exec");
+const run = require('child_process').exec;
 const zip = require("gulp-zip");
-8;
+//
 const src = "src";
 const dest = "dist";
 
@@ -33,13 +33,13 @@ gulp.task("styles", () => {
 });
 
 gulp.task("assets", () => {
-  return gulp.src(src + "/**/**/assets/*").pipe(gulp.dest(dest + "/assets/"));
+  return gulp
+    .src(src + "/**/**/assets/*")
+    .pipe(gulp.dest(dest + "/assets/"));
 });
 
 gulp.task("render-assets", () => {
-  return gulp
-    .src(src + "/**/gtk-2.0/")
-    .pipe(run("bash <%= file.path %>/render-assets.sh")); // to do
+    
 });
 
 gulp.task("zip", () => {
@@ -52,6 +52,7 @@ gulp.task("zip", () => {
 gulp.task("dev", () => {
   return gulp.watch(src + "/**/**/*.scss", done => {
     gulp.series(["styles"])(done);
+    run('gtk3-widget-factory');
   });
 });
 
