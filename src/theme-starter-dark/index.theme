@@ -1,7 +1,7 @@
 [X-GNOME-Metatheme]
 Name=Theme-Starter-Dark
 Type=X-GNOME-Metatheme
-Comment=Ubuntu community theme
+Comment=GNOME Starter Theme
 Encoding=UTF-8
 GtkTheme=Theme-Starter-Dark
 IconTheme=Adwaita

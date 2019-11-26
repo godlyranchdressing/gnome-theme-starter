@@ -1,8 +1,6 @@
-# Meson build directories (local and package)
-/build/
+/dist/
 /obj-*/
 /tutorials/
-
-gnome-shell.css
-gtk-dark.css
-gtk.css
+package-lock.json
+node_modules
+.vscode

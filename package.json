@@ -1,0 +1,26 @@
+{
+  "name": "gnome-theme-starter",
+  "version": "1.0.0",
+  "description": "A GNOME and GTK2/3 theme starter package based on Adwaita",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/godlyranchdressing/gnome-theme-starter.git"
+  },
+  "author": "",
+  "license": "GNUV3",
+  "bugs": {
+    "url": "https://github.com/godlyranchdressing/gnome-theme-starter/issues"
+  },
+  "homepage": "https://github.com/godlyranchdressing/gnome-theme-starter#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-copy": "^4.0.1",
+    "gulp-exec": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-zip": "^5.0.1"
+  }
+}
