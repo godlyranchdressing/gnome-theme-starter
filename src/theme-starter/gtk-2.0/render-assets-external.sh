@@ -2,10 +2,11 @@
 
 INKSCAPE="/usr/bin/inkscape"
 ZOPFLIPNG="/usr/bin/zopflipng"
+SRC_PATH="./src/theme-starter/gtk-2.0"
 
-SRC_FILE="assets-external.svg"
-ASSETS_DIR="assets"
-INDEX="assets-external.txt"
+SRC_FILE=$(readlink -f $SRC_PATH"/assets-external.svg")
+ASSETS_DIR=$(readlink -f $SRC_PATH"/assets")
+INDEX=$(readlink -f $SRC_PATH"/assets-external.txt")
 
 for i in `cat $INDEX`
 do 
@@ -17,7 +18,9 @@ else
     $INKSCAPE --export-id=$i \
               --export-id-only \
               --export-background-opacity=0 \
-              --export-png=$ASSETS_DIR/$i.png $SRC_FILE >/dev/null \
+              --export-type="png" \
+              --export-filename $ASSETS_DIR/$i.png \
+              $SRC_FILE >/dev/null \
     && $ZOPFLIPNG -ym $ASSETS_DIR/$i.png $ASSETS_DIR/$i.png
 fi
 done

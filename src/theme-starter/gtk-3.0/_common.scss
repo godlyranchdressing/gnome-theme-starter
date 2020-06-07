@@ -1473,6 +1473,7 @@ headerbar {
   border-style: solid;
   border-color: $alt_borders_color;
   border-radius: 0;
+  border-spacing: 6px;
 
   @include headerbar_fill(darken($bg_color, 10%));
 
@@ -1690,8 +1691,6 @@ headerbar {
 }
 
 headerbar {
-  border-spacing: 6px;
-
   // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
   entry,
   spinbutton,
@@ -2856,42 +2855,20 @@ radio {
   border: 1px solid;
   -gtk-icon-source: none;
 
-  & {
-    // for unchecked
-    $_c: if($variant=='light', white, $bg_color);
+  @include button(normal-alt, $edge: $shadow_color);
+  &:hover { @include button(hover-alt, $c:$checkradio_bg_color, $tc:$checkradio_fg_color, $edge: $shadow_color); }
+  &:hover:not(:checked) { @include button(hover-alt, $edge: $shadow_color); }
+  &:active { @include button(active, $c:$checkradio_bg_color, $tc:$checkradio_fg_color); }
+  &:checked { @include button(normal-alt, $c:$checkradio_bg_color, $tc:$checkradio_fg_color, $edge: $shadow_color); }
+  &:disabled { @include button(insensitive); }
+  &:backdrop {
+    @include button(backdrop);
 
-    @each $state, $t in ("", "normal"),
-                        (":hover", "hover"),
-                        (":active", "active"),
-                        (":disabled", "insensitive"),
-                        (":backdrop", "backdrop"),
-                        (":backdrop:disabled", 'backdrop-insensitive') {
-      &#{$state} {
-        @include check($t, $_c);
-      }
-    }
+    transition: $backdrop_transition;
+
+    &:disabled { @include button(backdrop-insensitive); }
   }
 
-  & {
-    // for checked
-    @each $t in (':checked'), (':indeterminate') {
-      &#{$t} {
-        @each $state, $t in ("", "normal"),
-                            (":hover", "hover"),
-                            (":active", "active"),
-                            (":disabled", "insensitive"),
-                            (":backdrop", "backdrop"),
-                            (":backdrop:disabled", 'backdrop-insensitive') {
-          &#{$state} {
-            @include check($t, $checkradio_bg_color, $checkradio_fg_color, $checked: true);
-          }
-        }
-      }
-    }
-  }
-
-  &:backdrop { transition: $backdrop_transition; }
-  
   @if $variant == 'light' {
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.
@@ -2910,17 +2887,15 @@ radio {
   menu menuitem & {
     margin: 0; // this is a workaround for a menu check/radio size allocation issue
 
-    &, &:checked, &:indeterminate {
-      &, &:hover, &:disabled { //FIXME use button reset mixin
-        min-height: 14px;
-        min-width: 14px;
-        background-image: none;
-        background-color: transparent;
-        box-shadow: none;
-        -gtk-icon-shadow: none;
-        color: inherit;
-        border-color: currentColor;
-      }
+    &, &:hover, &:disabled { //FIXME use button reset mixin
+      min-height: 14px;
+      min-width: 14px;
+      background-image: none;
+      background-color: transparent;
+      box-shadow: none;
+      -gtk-icon-shadow: none;
+      color: inherit;
+      border-color: currentColor;
     }
   }
 }
@@ -2981,7 +2956,15 @@ treeview.view radio {
 
       @if $variant == 'light' { border-color: $selected_borders_color; }
     }
+
+    &:disabled {
+      color: $insensitive_fg_color;
+
+      &:backdrop { color: $backdrop_insensitive_color; }
+    }
   }
+
+  &:backdrop { &:selected, & { color: $backdrop_fg_color; }}
 }
 
 treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a workaround
@@ -4727,11 +4710,7 @@ stackswitcher.circular {
  * Emoji *
  ********/
 
-popover.emoji-picker > contents {
-  padding: 0;
-
-  entry.search { margin: 5px; }
-}
+popover.emoji-picker { padding-left: 0; padding-right: 0; }
 
 button.emoji-section {
   border-color: transparent;
@@ -4739,7 +4718,7 @@ button.emoji-section {
   border-style: none none solid;
   border-radius: 0;
 
-  margin: 2px 8px 4px;
+  margin: 2px 4px 2px 4px;
   padding: 3px 0 0;
   min-width: 32px;
   min-height: 28px;
@@ -4751,11 +4730,8 @@ button.emoji-section {
 
   outline-offset: -5px;
 
-  &:dir(ltr):not(:last-child) { margin-right: 0; }
-  &:dir(rtl):not(:last-child) { margin-left: 0; }
-
   &:backdrop:not(:checked) { border-color: transparent; }
-  &:hover { border-color: if($variant == 'light', $borders_color, transparentize($fg_color, .9)); }
+  &:hover { border-color: $borders_color; }
   &:checked { border-color: $selected_bg_color; }
 
   label {
@@ -4773,7 +4749,7 @@ popover.emoji-picker .emoji {
   padding: 6px;
   border-radius: 6px;
 
-  &:hover {
+  :hover {
     background: $selected_bg_color;
   }
 }
