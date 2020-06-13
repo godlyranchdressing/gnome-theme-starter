@@ -62,10 +62,17 @@ gulp.task("zip", () => {
     .pipe(gulp.dest("."));
 });
 
-gulp.task("dev", () => {
-  return gulp.watch(src + "/**/**/*.scss", done => {
+gulp.task("dev-gtk3", () => {
+  return gulp.watch(src + "/**/**/*.scss", (done) => {
     gulp.series(["styles"])(done);
-    run('gtk3-widget-factory');
+    run("gtk3-widget-factory");
+  });
+});
+
+gulp.task("dev-gtk2", () => {
+  return gulp.watch(src + "/**/gtk-2.0/*", (done) => {
+    gulp.series(["gtk2"])(done);
+    run("awf-gtk2");
   });
 });
 

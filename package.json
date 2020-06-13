@@ -6,7 +6,8 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "dev": "gulp dev"
+    "gtk3": "gulp dev-gtk3",
+    "gtk2": "gulp dev-gtk2"
   },
   "repository": {
     "type": "git",

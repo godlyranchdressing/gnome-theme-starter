@@ -8,3 +8,9 @@ You can install dependencies by running ```yarn```
 After modifying the theme, you can compile it by running ```yarn build```
 ```yarn build``` creates a dist folder with the two compilled variants of your theme
 You can make a symlink to these folders in your ```~/.themes``` folder for testing and using
+
+## Testing changes
+Not required, but highly recommended.
+GTK3 Widget Factory + AWF2/3.
+
+[AWF](https://github.com/valr/awf)
