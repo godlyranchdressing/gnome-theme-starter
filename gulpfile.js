@@ -7,8 +7,8 @@ const run = require('child_process').exec;
 const zip = require("gulp-zip");
 //
 const src = "src";
-const darkGtk2Src = src + "/theme-starter-dark/gtk-2.0";
-const lightGtk2Src = src + "/theme-starter/gtk-2.0";
+const darkGtk2Src = src + "/theme-dark/gtk-2.0";
+const lightGtk2Src = src + "/theme/gtk-2.0";
 const dest = "dist";
 //
 
